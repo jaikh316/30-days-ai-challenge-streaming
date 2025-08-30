@@ -210,7 +210,7 @@
                 <div class="flex justify-between">
                   <span class="text-gray-400 text-base">Persona:</span>
                   <span class="text-blue-300 text-base"
-                    >"Vocalix," the Starship AI</span
+                    >"Vocalix," Your Smart Voice Companion</span
                   >
                 </div>
                 <div
@@ -259,13 +259,33 @@
             <!-- Agent Status -->
             <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
               <div class="flex justify-between items-center mb-4">
-                  <h3 class="text-lg font-semibold text-white">Vocalix Status</h3>
-                  <button id="settings-button" title="Configure API Keys" class="text-gray-400 hover:text-white transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                  </button>
+                <h3 class="text-lg font-semibold text-white">Vocalix Status</h3>
+                <button
+                  id="settings-button"
+                  title="Configure API Keys"
+                  class="text-gray-400 hover:text-white transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </button>
               </div>
               <div
                 id="agent-status"
@@ -368,43 +388,106 @@
       </div>
     </div>
 
-    <div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
-        <div class="bg-gray-800 rounded-lg p-8 w-full max-w-lg border border-gray-600 shadow-xl transform transition-all">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-white">API Key Configuration</h2>
-                <button id="close-modal-button" class="text-gray-400 hover:text-white text-3xl font-bold">&times;</button>
-            </div>
-            <p class="text-gray-400 mb-6 text-sm">
-                Your keys are saved locally in your browser and sent to the server for this session only. They are not stored permanently on the server.
-            </p>
-            <div class="space-y-4">
-                <div>
-                    <label for="assemblyai-key" class="block text-sm font-medium text-gray-300">AssemblyAI Key (STT)</label>
-                    <input type="password" id="assemblyai-key" placeholder="Enter your AssemblyAI API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label for="gemini-key" class="block text-sm font-medium text-gray-300">Google Gemini Key (LLM)</label>
-                    <input type="password" id="gemini-key" placeholder="Enter your Google Gemini API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label for="murf-key" class="block text-sm font-medium text-gray-300">Murf AI Key (TTS)</label>
-                    <input type="password" id="murf-key" placeholder="Enter your Murf AI API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <hr class="border-gray-600"/>
-                <p class="text-gray-400 text-sm">Optional keys for web search and weather tools:</p>
-                <div>
-                    <label for="tavily-key" class="block text-sm font-medium text-gray-300">Tavily AI Key (Web Search)</label>
-                    <input type="password" id="tavily-key" placeholder="Enter your Tavily AI API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                 <div>
-                    <label for="openweather-key" class="block text-sm font-medium text-gray-300">OpenWeather Key (Weather)</label>
-                    <input type="password" id="openweather-key" placeholder="Enter your OpenWeather API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-            </div>
-            <div class="mt-8 flex justify-end">
-                <button id="save-keys-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save and Connect</button>
-            </div>
+    <div
+      id="settings-modal"
+      class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden"
+    >
+      <div
+        class="bg-gray-800 rounded-lg p-8 w-full max-w-lg border border-gray-600 shadow-xl transform transition-all"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-white">API Key Configuration</h2>
+          <button
+            id="close-modal-button"
+            class="text-gray-400 hover:text-white text-3xl font-bold"
+          >
+            &times;
+          </button>
         </div>
+        <p class="text-gray-400 mb-6 text-sm">
+          Your keys are saved locally in your browser and sent to the server for
+          this session only. They are not stored permanently on the server.
+        </p>
+        <div class="space-y-4">
+          <div>
+            <label
+              for="assemblyai-key"
+              class="block text-sm font-medium text-gray-300"
+              >AssemblyAI Key (STT)</label
+            >
+            <input
+              type="password"
+              id="assemblyai-key"
+              placeholder="Enter your AssemblyAI API Key"
+              class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label
+              for="gemini-key"
+              class="block text-sm font-medium text-gray-300"
+              >Google Gemini Key (LLM)</label
+            >
+            <input
+              type="password"
+              id="gemini-key"
+              placeholder="Enter your Google Gemini API Key"
+              class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label
+              for="murf-key"
+              class="block text-sm font-medium text-gray-300"
+              >Murf AI Key (TTS)</label
+            >
+            <input
+              type="password"
+              id="murf-key"
+              placeholder="Enter your Murf AI API Key"
+              class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <hr class="border-gray-600" />
+          <p class="text-gray-400 text-sm">
+            Optional keys for web search and weather tools:
+          </p>
+          <div>
+            <label
+              for="tavily-key"
+              class="block text-sm font-medium text-gray-300"
+              >Tavily AI Key (Web Search)</label
+            >
+            <input
+              type="password"
+              id="tavily-key"
+              placeholder="Enter your Tavily AI API Key"
+              class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label
+              for="openweather-key"
+              class="block text-sm font-medium text-gray-300"
+              >OpenWeather Key (Weather)</label
+            >
+            <input
+              type="password"
+              id="openweather-key"
+              placeholder="Enter your OpenWeather API Key"
+              class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        </div>
+        <div class="mt-8 flex justify-end">
+          <button
+            id="save-keys-button"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200"
+          >
+            Save and Connect
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="/static/script.js"></script>
