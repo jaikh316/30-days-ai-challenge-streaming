@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# VS Code
+.vscode/
+tempCodeRunnerFile.py
+# Temporary audio files
+/static/*.mp3
+static/streamed_audio_*.webm
+static/response_*.mp3
+static/voice.png
+
+venv/

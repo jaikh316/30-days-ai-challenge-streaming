@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocalix - AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(59, 130, 246, 0.45) 2px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(59, 130, 246, 0.45) 2px,
+            transparent 1px
+          );
+        background-size: 40px 40px;
+        z-index: -1;
+        animation: pulseGrid 6s infinite alternate;
+      }
+
+      @keyframes pulseGrid {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 0.8;
+        }
+      }
+
+      /* Vocalix Persona Header Styling */
+      .container {
+        margin: 2rem auto;
+        /* padding: 2rem; */
+        border-radius: 20px;
+        /*background-color: #0f172a; /* solid dark navy to block grid */
+        background: linear-gradient(135deg, #6c5ce7, #2d3436);
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.7),
+          /* inner glow */ 0 0 60px rgba(59, 130, 246, 0.5),
+          /* medium glow */ 0 0 100px rgba(59, 130, 246, 0.4); /* outer glow */
+        transition: box-shadow 0.3s ease-in-out;
+      }
+
+      .container:hover {
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.8),
+          0 0 80px rgba(59, 130, 246, 0.6), 0 0 120px rgba(59, 130, 246, 0.5);
+      }
+
+      .inner-content {
+        padding-left: 1.5rem; /* adds side breathing space */
+        padding-right: 1.5rem;
+      }
+
+      .persona-header {
+        background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+        border: 2px solid #3b82f6;
+        border-radius: 50px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .persona-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(59, 130, 246, 0.1),
+          transparent
+        );
+        animation: scan 3s linear infinite;
+      }
+
+      @keyframes scan {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .persona-title {
+        color: #3b82f6;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        font-family: "Courier New", monospace;
+        letter-spacing: 2px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .persona-subtitle {
+        color: #94a3b8;
+        font-size: 1.5rem;
+        font-style: italic;
+        position: relative;
+        z-index: 1;
+      }
+
+      .ai-emoji {
+        font-size: 1.5rem;
+        margin: 0 0.5rem;
+      }
+
+      .status-indicator {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background-color: #10b981;
+        border-radius: 50%;
+        margin-left: 8px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .voice-signature {
+        background: linear-gradient(45deg, #1e293b, #334155);
+        border: 1px solid #475569;
+        border-radius: 8px;
+        padding: 1rem;
+        color: #e2e8f0;
+        font-family: "Courier New", monospace;
+        font-size: 0.875rem;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-gray-900 text-white font-sans">
+    <div class="container mx-auto px-4 py-12 max-w-[1400px]">
+      <div class="inner-content max-w-6xl mx-auto py-8">
+        <!-- Vocalix Header -->
+        <div class="persona-header">
+          <div class="persona-title">
+            <span class="ai-emoji">🤖</span>
+            Vocalix
+            <span class="status-indicator"></span>
+          </div>
+          <div class="persona-subtitle">
+            Advanced Responsive Intelligence Assistant
+            <br />
+            <!-- <small
+              >🎯 Intelligent • 💬 Conversational • 🧠 Memory-Enhanced</small
+            > -->
+          </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Left Column: Controls -->
+          <div class="space-y-6">
+            <!-- Vocalix Voice Signature -->
+            <div class="voice-signature">
+              <h3 class="text-lg font-semibold text-blue-400 mb-3">
+                🎙️ Tone & Style
+              </h3>
+              <div class="space-y-2">
+                <!-- <div class="flex justify-between">
+                  <span class="text-gray-400">Voice:</span>
+                  <span class="text-blue-300">British Male</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Style:</span>
+                  <span class="text-blue-300">Professional</span>
+                </div> -->
+                <div class="flex justify-between">
+                  <span class="text-gray-400 text-base">Persona:</span>
+                  <span class="text-blue-300 text-base"
+                    >"Vocalix," the Starship AI</span
+                  >
+                </div>
+                <div
+                  class="mt-3 text-base text-green-300 italic font-medium leading-relaxed"
+                >
+                  "Vocalix is a sophisticated and professional AI persona
+                  inspired by the character JARVIS. Its personality is polite,
+                  efficient, and intelligent, and it addresses the user with
+                  formal titles like 'Sir' or 'Ma'am'. It addresses users with a
+                  formal and professional tone, aiming to be maximally helpful.
+                  Vocalix is designed to enhance user experience through its
+                  attentive and courteous interactions, making it an invaluable
+                  assistant for managing tasks and providing information."
+                </div>
+              </div>
+            </div>
+
+            <!-- Recording Controls -->
+            <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+              <h3 class="text-lg font-semibold text-white mb-4"></h3>
+
+              <button
+                id="record-button"
+                class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
+              >
+                <svg
+                  id="record-icon"
+                  class="w-6 h-6 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <circle cx="10" cy="10" r="8" />
+                </svg>
+                <svg
+                  id="stop-icon"
+                  class="w-6 h-6 mr-2 hidden"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <rect x="6" y="6" width="8" height="8" />
+                </svg>
+                <span>Start Conversation</span>
+              </button>
+            </div>
+
+            <!-- Agent Status -->
+            <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+              <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-lg font-semibold text-white">Vocalix Status</h3>
+                  <button id="settings-button" title="Configure API Keys" class="text-gray-400 hover:text-white transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                  </button>
+              </div>
+              <div
+                id="agent-status"
+                class="px-4 py-2 rounded-lg font-medium bg-gray-900/30 text-gray-300 border border-gray-600"
+              >
+                Initializing Vocalix...
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Current Turn -->
+          <div
+            class="bg-gray-800/50 rounded-lg p-4 border border-gray-700 h-full"
+          >
+            <h3 class="text-lg font-semibold text-white mb-4">Transcription</h3>
+            <div id="current-turn-container" class="min-h-[200px]">
+              <div class="text-sm text-gray-400 mb-2"></div>
+              <div class="p-3 bg-gray-800/30 rounded-lg border border-gray-600">
+                <div class="text-gray-400">
+                  Start conversation with Vocalix to see real-time transcription
+                </div>
+              </div>
+            </div>
+            <!-- Animated Image -->
+            <div class="mt-6 flex justify-center">
+              <img
+                src="/static/voice.png"
+                alt="Vocalix Bot"
+                class="w-48 h-48 rounded-full animate-float transition-transform duration-500 hover:scale-125 shadow-[0_0_30px_rgba(59,130,246,0.9),0_0_60px_rgba(59,130,246,0.6),0_0_90px_rgba(59,130,246,0.4)]"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversation History: full width below -->
+        <div class="mt-6 bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+          <h3 class="text-lg font-semibold text-white mb-4">
+            Conversation History
+          </h3>
+          <div
+            id="turn-history-container"
+            class="max-h-[400px] overflow-y-auto space-y-2"
+          >
+            <div class="text-gray-400 text-m">
+              Awaiting your first command… activate Vocalix with your voice!
+            </div>
+          </div>
+        </div>
+
+        <!-- System Messages: full width below -->
+        <div class="mt-6 bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+          <h3 class="text-lg font-semibold text-white mb-4">System Messages</h3>
+          <div
+            id="system-messages"
+            class="max-h-[200px] overflow-y-auto space-y-2"
+          >
+            <div
+              class="mb-2 p-3 bg-yellow-900/20 border border-yellow-600 rounded-lg text-yellow-300 max-h-60 overflow-y-auto"
+            >
+              <div class="text-xs text-yellow-400 mb-1">System Status</div>
+              <div class="text-sm">
+                Vocalix initialized with British voice signature. Click "Start
+                Conversation" to begin.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-6 bg-gray-800/30 rounded-lg p-4 border border-gray-700">
+          <h4 class="text-lg font-semibold text-white mb-3">
+            Day 24 - Vocalix Instructions
+          </h4>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300"
+          >
+            <div>
+              <strong class="text-blue-400">Speak naturally:</strong> Vocalix
+              uses advanced turn detection to understand when you're finished
+            </div>
+            <div>
+              <strong class="text-green-400">Consistent voice:</strong> Vocalix
+              maintains a signature British voice for authentic character
+              experience
+            </div>
+            <div>
+              <strong class="text-purple-400">JARVIS-style responses:</strong>
+              Professional, intelligent, and anticipatory assistance
+            </div>
+            <div>
+              <strong class="text-orange-400">Memory enabled:</strong> Vocalix
+              remembers your conversation context and preferences
+            </div>
+          </div>
+          <div class="mt-3 text-xs text-gray-500 text-center">
+            Using AssemblyAI • Google Gemini • Murf AI • Vocalix Persona System
+            with Signature Voice
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 rounded-lg p-8 w-full max-w-lg border border-gray-600 shadow-xl transform transition-all">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">API Key Configuration</h2>
+                <button id="close-modal-button" class="text-gray-400 hover:text-white text-3xl font-bold">&times;</button>
+            </div>
+            <p class="text-gray-400 mb-6 text-sm">
+                Your keys are saved locally in your browser and sent to the server for this session only. They are not stored permanently on the server.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label for="assemblyai-key" class="block text-sm font-medium text-gray-300">AssemblyAI Key (STT)</label>
+                    <input type="password" id="assemblyai-key" placeholder="Enter your AssemblyAI API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="gemini-key" class="block text-sm font-medium text-gray-300">Google Gemini Key (LLM)</label>
+                    <input type="password" id="gemini-key" placeholder="Enter your Google Gemini API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="murf-key" class="block text-sm font-medium text-gray-300">Murf AI Key (TTS)</label>
+                    <input type="password" id="murf-key" placeholder="Enter your Murf AI API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <hr class="border-gray-600"/>
+                <p class="text-gray-400 text-sm">Optional keys for web search and weather tools:</p>
+                <div>
+                    <label for="tavily-key" class="block text-sm font-medium text-gray-300">Tavily AI Key (Web Search)</label>
+                    <input type="password" id="tavily-key" placeholder="Enter your Tavily AI API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                 <div>
+                    <label for="openweather-key" class="block text-sm font-medium text-gray-300">OpenWeather Key (Weather)</label>
+                    <input type="password" id="openweather-key" placeholder="Enter your OpenWeather API Key" class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+            <div class="mt-8 flex justify-end">
+                <button id="save-keys-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save and Connect</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
