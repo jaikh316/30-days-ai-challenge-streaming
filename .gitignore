@@ -15,6 +15,5 @@ tempCodeRunnerFile.py
 /static/*.mp3
 static/streamed_audio_*.webm
 static/response_*.mp3
-static/voice.png
 
 venv/
